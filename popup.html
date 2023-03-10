@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>eLitmus Exam Proctor</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <form id="input-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name"><br><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email"><br><br>
+      <label for="invitation-code">Test Invitation Code:</label>
+      <input type="text" id="invitation-code" name="invitation-code"><br><br>
+      <button type="submit" id="start-test-btn">Start Test</button>
+      <video id="video" autoplay playsinline></video>
+    </form>
+
+    <!--<video id="video-element"></video>
+    videoElement.srcObject = stream;
+    videoElement.play();-->
+
+    <script src="popup.js"></script>
+  </body>
+</html>

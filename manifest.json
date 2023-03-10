@@ -1,0 +1,35 @@
+{
+   
+    "name": "eLitmus Exam Proctor",
+    "version": "1.0",
+    "description": "An exam proctoring extension to prevent cheating during exams",
+    "manifest_version": 3,
+    "permissions": ["activeTab", "declarativeNetRequest", "storage", "identity"],
+    "host_permissions": [
+      "https://*.example.org/","https://*.google.com/"],
+    "optional_permissions":["webRequest"],
+    "background": {
+      "service_worker": "background.js"
+ 
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://*/*", "http://*/*"],
+        "js": ["content.js"],
+        "run_at": "document_end"
+      }
+    ],
+    
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icon16.png",
+        "32": "icon32.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+      }
+    },
+    "options_page": "options.html"
+    
+  }
+  

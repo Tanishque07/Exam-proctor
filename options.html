@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <h1>Admin Dashboard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Test Status</th>
+          <th>Images</th>
+        </tr>
+      </thead>
+      <tbody id="dashboard-body">
+      </tbody>
+    </table>
+    <script>
+      // Retrieve stored data from the browser's storage
+      chrome.storage.local.get(['testData', 'imageData'], function(data) {
+        // Check if data exists
+        if (data.testData && data.imageData) {
+          // Loop through the test data and create table rows
+          data.testData.forEach(function(test) {
+            // Create a row for each test
+            var row = document.createElement('tr');
+
+            // Create cells for each column
+            var timestampCell = document.createElement('td');
+            timestampCell.textContent = test.timestamp;
+            row.appendChild(timestampCell);
+
+            var nameCell = document.createElement('td');
+            nameCell.textContent = test.name;
+            row.appendChild(nameCell);
+
+            var emailCell = document.createElement('td');
+            emailCell.textContent = test.email;
+            row.appendChild(emailCell);
+
+            var statusCell = document.createElement('td');
+            statusCell.textContent = test.status;
+            row.appendChild(statusCell);
+
+            var imagesCell = document.createElement('td');
+            var imageCount = 0;
+            data.imageData.forEach(function(image) {
+              if (image.timestamp === test.timestamp) {
+                // Display the image
+                var img = document.createElement('img');
+                img.src = URL.createObjectURL(image.data);
+                imagesCell.appendChild(img);
+
+                imageCount++;
+              }
+            });
+            if (imageCount === 0) {
+              imagesCell.textContent = 'No images.';
+            }
+            row.appendChild(imagesCell);
+
+            // Add the row to the table
+            document.getElementById('dashboard-body').appendChild(row);
+          });
+        } else {
+          // Display a message if no data is found
+          var message = document.createElement('p');
+          message.textContent = 'No data found.';
+          document.body.appendChild(message);
+        }
+      });
+    </script>
+  </body>
+</html>
